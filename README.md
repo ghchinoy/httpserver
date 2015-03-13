@@ -22,3 +22,7 @@ Defaults to current directory for HTML, optional `-web` param for
 HTML dir location.
 
 Defaults to 8085 for port, optional `-port` param for port.
+
+Example (redundant, since these are the defaults)
+
+    httpserver -port 8085 -web .
