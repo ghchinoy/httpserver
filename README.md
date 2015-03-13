@@ -2,8 +2,21 @@
 
 So simple, almost no reasons to commit.
 
+## Prerequisites
+
+[Go](http://golang.org/dl/)
+
+
+## Get and install
+
     go get bitbucket.org/ghchinoy/httpserver
-    go install httpserver
+    go install github.com/ghchinoy/httpserver
+
+## Run
+
+Once installed, run via:
+
+    httpserver
 
 Defaults to current directory for HTML, optional `-web` param for
 HTML dir location.
