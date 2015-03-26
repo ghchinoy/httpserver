@@ -9,7 +9,7 @@ So simple, almost no reasons to commit.
 
 ## Get and install
 
-    go get bitbucket.org/ghchinoy/httpserver
+    go get github.com/ghchinoy/httpserver
     go install github.com/ghchinoy/httpserver
 
 ## Run
