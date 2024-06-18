@@ -31,9 +31,18 @@ func main() {
 	fmt.Printf("Serving files in the %s directory on port %v...\n", baseWebDir, port)
 
 	// Server
-	http.Handle("/", http.FileServer(http.Dir(baseWebDir)))
+	http.Handle("/", cors(http.FileServer(http.Dir(baseWebDir))))
 	err := http.ListenAndServe(":"+strconv.Itoa(port), nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
+}
+
+func cors(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		h.ServeHTTP(w, r)
+	})
 }
