@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and [Common Changelog](https://common-changelog.org/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1](https://github.com/ghchinoy/httpserver/compare/v0.1.0...v0.1.1) (2026-11-22)
+
+
+### Documentation
+
+* improve README per make-readme checklist ([2df88e2](https://github.com/ghchinoy/httpserver/commit/2df88e2b7d7c9a83c4bc27c308a17abf4fb4c299))
+
 ## [Unreleased]
 
 ## [0.1.0] - 2026-11-21
