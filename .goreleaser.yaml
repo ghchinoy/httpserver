@@ -1,0 +1,83 @@
+# httpserver — GoReleaser v2 configuration.
+#
+# Builds reproducible, static cross-platform binaries, uploads checksums and
+# archives to GitHub Releases, and updates Casks/httpserver.rb in
+# ghchinoy/homebrew-tap.
+version: 2
+
+project_name: httpserver
+
+before:
+  hooks:
+    - go build -o /dev/null .
+
+builds:
+  - id: httpserver
+    main: .
+    binary: httpserver
+    env:
+      - CGO_ENABLED=0
+    mod_timestamp: "{{ .CommitTimestamp }}"
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+      - -X main.version={{ .Version }}
+      - -X main.commit={{ .ShortCommit }}
+      - -X main.date={{ .Date }}
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - formats:
+      - tar.gz
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+    files:
+      - LICENSE*
+      - README.md
+
+checksum:
+  name_template: "checksums.txt"
+
+homebrew_casks:
+  - name: httpserver
+    directory: Casks
+    repository:
+      owner: ghchinoy
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    homepage: "https://github.com/ghchinoy/httpserver"
+    description: "Zero-dependency static HTTP file server with secure defaults, optional CORS, and structured logging"
+    binaries:
+      - httpserver
+    commit_author:
+      name: goreleaserbot
+      email: bot@goreleaser.com
+    commit_msg_template: "Brew cask update for {{ .ProjectName }} version {{ .Tag }}"
+    hooks:
+      post:
+        install_steps: |
+          on_macos do
+            run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{ .StagedPath }}/httpserver"]
+          end
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+
+release:
+  github:
+    owner: ghchinoy
+    name: httpserver

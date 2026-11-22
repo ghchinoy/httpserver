@@ -1,0 +1,17 @@
+# Build artifacts
+/httpserver
+/dist/
+coverage.out
+*.test
+
+# OS & editor files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Local agent and issue-tracker state
+.serena
+.beads
+.dolt
+docs-bundle
